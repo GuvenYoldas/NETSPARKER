@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterUser</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <form name="RegisterUser" id="RegisterUser">
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="E-Mail" required>
+                    <div class="invalid-feedback">
+                        Valid first name is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="pass" name="pass" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="passConfirm" name="passConfirm" placeholder="Password Confirm" required>
+                </div>
+
+
+
+                <div class="form-group">
+                    <input type="button" value="Create User" class="btn btn-primary" onclick="SaveUser()" />
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function SaveUser() {
+            if ($('#RegisterUser')[0].checkValidity()) {
+
+                var input = {
+                    'email': $('#email').val(),
+                    'pass': $('#pass').val(),
+                    'passConfirm': $('#passConfirm').val()
+
+                };
+
+                $.ajax({
+                    type: "POST", cache: false,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(input),
+                    url: "/JsonHelper/RegisterUser",
+                    success: function (result) {
+                        if (result.success == 0) {
+                            window.location.href = '/Home/Index';
+                        }
+                        else {
+                            alert(result.message)
+                        }
+                    },
+                    error: function () { alert('Beklenmedik bir hata oluştu.'); }
+                });
+            }
+            else
+                alert("Tüm alanları doğru girdiğinizden emin olun.");
+        }
+
+    </script>
+</body>
+</html>
+

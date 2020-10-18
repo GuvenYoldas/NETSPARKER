@@ -1,0 +1,59 @@
+﻿
+@model NETSPARKER.NetCoreMvc.Models.ProductViewModel
+
+@using PH = NETSPARKER.Common.Helpers;
+@{
+    Layout = "_Layout";
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                @Html.HiddenFor(m => m.id)
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url" class="control-label"></label>
+                    <input asp-for="Url" class="form-control" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Interval" class="control-label"></label>
+                    <select asp-for="Interval" asp-items="Html.GetEnumSelectList<PH.IntervalMonitoring>()" class="form-control">
+                    </select>
+                    <span asp-validation-for="Interval" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NotificationTypes" class="control-label"></label>
+                    <div class="col-sm-10">
+                        @foreach (PH.NotificationTypes item in Enum.GetValues(typeof(PH.NotificationTypes)))
+                        {
+                            <input type="checkbox" name="NotificationTypes" value="@((int)item)" checked="@(Model.id > 0 && Model.NotificationTypes.Contains(item))"> @item <br />
+                        }
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\Base\" />
+    <Folder Include="Repositories\Base\" />
+    <Folder Include="Services\Base\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NETSPARKER.Core\NETSPARKER.Core.csproj" />
+    <ProjectReference Include="..\NETSPARKER.Data\NETSPARKER.Data.csproj" />
+  </ItemGroup>
+
+</Project>
